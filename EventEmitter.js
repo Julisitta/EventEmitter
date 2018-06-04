@@ -42,14 +42,12 @@ class Jurnaluga {
         return this.name + " with " + topic + " about " + rnd;
     }
     interval(myEventEmit, topic) {
-        let timerId = setInterval(
-            () => myEventEmit.emit(topic, this.sendNews(topic)),
-            1000
-        );
-        setTimeout(
-            () => clearInterval(timerId),
-            5000
-        );
+        let timerId = setInterval(() => 
+            myEventEmit.emit(topic, this.sendNews(topic)),
+        1000);
+        setTimeout(() => 
+            clearInterval(timerId),
+        5000);
     }	
 }
 
