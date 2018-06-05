@@ -9,15 +9,13 @@ class EventEmitter {
         this._storage[topicName].push(callback);
     }
     removeSubscriber(topicName, callback) {
-        let stor = this._storage[topicName];
-        if (stor) {
-            stor = stor.filter(storCb => callback !== storCb);
+        if (this._storage[topicName]) {
+            this._storage[topicName] = stor.filter(storCb => callback !== storCb);
         }
     }
     emit(topicName, data) {
-        let stor = this._storage[topicName];
-        if(stor) {
-            stor.forEach(callback => callback(data));
+        if(this._storage[topicName]) {
+            this._storage[topicName].forEach(callback => callback(data));
         }
     }
 }
