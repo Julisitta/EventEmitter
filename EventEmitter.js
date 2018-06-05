@@ -10,7 +10,7 @@ class EventEmitter {
     }
     removeSubscriber(topicName, callback) {
         if (this._storage[topicName]) {
-            this._storage[topicName] = stor.filter(storCb => callback !== storCb);
+            this._storage[topicName] = this._storage[topicName].filter(storCb => callback !== storCb);
         }
     }
     emit(topicName, data) {
