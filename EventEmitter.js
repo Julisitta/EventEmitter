@@ -9,15 +9,15 @@ class EventEmitter {
         this._storage[topicName].push(callback);
     }
     removeSubscriber(topicName, callback) {
-        let event = this._storage[topicName];
-        if (event) {
-            this._storage[topicName] = event.filter(eventCb => callback !== eventCb);
+        let stor = this._storage[topicName];
+        if (stor) {
+            stor = stor.filter(storCb => callback !== storCb);
         }
     }
     emit(topicName, data) {
-        let event = this._storage[topicName];
-        if(event) {
-            event.forEach(callback => callback(data));
+        let stor = this._storage[topicName];
+        if(stor) {
+            stor.forEach(callback => callback(data));
         }
     }
 }
@@ -39,7 +39,7 @@ class Jurnaluga {
     }
     sendNews(topic) {
         let rnd = Math.random().toString(36).substring(2, 15);
-        return this.name + " with " + topic + " about " + rnd;
+        return this.name + " topic: " + topic + " about " + rnd;
     }
     interval(myEventEmit, topic) {
         let timerId = setInterval(() => 
