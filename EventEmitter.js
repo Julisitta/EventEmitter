@@ -1,21 +1,21 @@
 class EventEmitter {
     constructor() {
-        this._events = {};
+        this._storage = {};
     }
     addSubscriber(topicName, callback) {
-        if(!this._events[topicName]) {
-            this._events[topicName] = [];
+        if(!this._storage[topicName]) {
+            this._storage[topicName] = [];
         }
-        this._events[topicName].push(callback);
+        this._storage[topicName].push(callback);
     }
     removeSubscriber(topicName, callback) {
-        const event = this._events[topicName];
+        let event = this._storage[topicName];
         if (event) {
-            this._events[topicName] = event.filter(eventCb => callback !== eventCb);
+            this._storage[topicName] = event.filter(eventCb => callback !== eventCb);
         }
     }
     emit(topicName, data) {
-        const event = this._events[topicName];
+        let event = this._storage[topicName];
         if(event) {
             event.forEach(callback => callback(data));
         }
@@ -44,20 +44,20 @@ class Jurnaluga {
     interval(myEventEmit, topic) {
         let timerId = setInterval(() => 
             myEventEmit.emit(topic, this.sendNews(topic)),
-        1000);
+            1000);
         setTimeout(() => 
-            clearInterval(timerId),
-        5000);
+                clearInterval(timerId),
+            5000);
     }	
 }
 
-const myEventEmitter = new EventEmitter();
+let myEventEmitter = new EventEmitter();
 
 let user1 = new User("Margo");
 let user2 = new User("Renat");
 let user3 = new User("Kate");
 
-let topics = ["ShouBiz", "Cars", "Feshion"]
+let topics = ["ShouBiz", "Cars", "Fashion"]
 
 let jur = new Jurnaluga("CrocusSity", topics);
 
