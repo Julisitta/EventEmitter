@@ -12,6 +12,9 @@ class EventEmitter {
         if (this._storage[topicName]) {
             this._storage[topicName] = this._storage[topicName].filter(storCb => callback !== storCb);
         }
+        if ((this._storage[topicName]).length == 0) {
+            delete this._storage[topicName]; 
+        }
     }
     emit(topicName, data) {
         if(this._storage[topicName]) {
